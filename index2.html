@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <title>Recruitment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .error {
+            color: #ff0000;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>RECRUITMENT</h1>
+        <form action="{{ url_for('get_recurites') }}" method="post">
+            <label for="skill">SEARCH SKILL</label><br><br>
+            <input type="text" id="skill" name="skill" required><br><br>
+
+            <input type="submit" value="SEARCH">
+        </form>
+
+        {% if em %}
+            <h2>EMPLOYEES WITH SKILL {{ skill }}:</h2>
+            <table>
+                <tr>
+                    <th>NAME</th>
+                    <th>EMPLOY_ID</th>
+                    <th>CONTACT</th>
+                </tr>
+                {% for employee in em %}
+                <tr>
+                    <td>{{ employee[1] }}</td>
+                    <td>{{ employee[2] }}</td>
+                    <td>{{ employee[3] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% elif error %}
+            <div class="error">Error: {{ error }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
